@@ -1,0 +1,20 @@
+port: 8317
+auth-dir: "/root/.cli-proxy-api"
+remote-management:
+  allow-remote: true
+  secret-key: "your-secret-key-here"
+auth:
+  providers: []
+debug: false
+usage-statistics-enabled: true
+
+openai-compatibility:
+  - name: "zhipu"
+    base-url: "https://api.z.ai/api/coding/paas/v4"
+    api-key-entries:
+      - api-key: "YOUR_ZHIPU_API_KEY"
+    models:
+      - name: "glm-4.5-air"
+        alias: "glm-4.5-air"
+      - name: "glm-4.7"
+        alias: "glm-4.7"

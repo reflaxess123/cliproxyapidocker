@@ -1,0 +1,16 @@
+services:
+  cli-proxy:
+    build: .
+    container_name: cli-proxy-api
+    ports:
+      - "8317:8317"  # API
+      - "8318:8318"  # Tunnel URL endpoint
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+      - ./auth:/root/.cli-proxy-api:rw
+      - ./singbox-config.json:/etc/sing-box/config.json:ro
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    restart: unless-stopped

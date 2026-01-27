@@ -1,0 +1,4 @@
+auth/
+config.yaml
+singbox-config.json
+*.log

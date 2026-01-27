@@ -1,0 +1,70 @@
+{
+  "log": {
+    "level": "info"
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "proxy-dns",
+        "address": "https://1.1.1.1/dns-query",
+        "detour": "vless-out"
+      }
+    ],
+    "strategy": "ipv4_only"
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "inet4_address": "172.19.0.1/30",
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system"
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "vless",
+      "tag": "vless-out",
+      "server": "YOUR_SERVER_IP",
+      "server_port": 15727,
+      "uuid": "YOUR_UUID",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.example.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "YOUR_PUBLIC_KEY",
+          "short_id": "YOUR_SHORT_ID"
+        }
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "final": "vless-out",
+    "rules": [
+      {
+        "ip_cidr": ["192.168.0.0/16", "172.16.0.0/12", "10.0.0.0/8", "127.0.0.0/8"],
+        "outbound": "direct"
+      },
+      {
+        "domain_suffix": [".internal", ".local", ".localhost", ".trycloudflare.com", ".cloudflare.com", ".cloudflareinsights.com"],
+        "outbound": "direct"
+      },
+      {
+        "domain_keyword": ["cloudflare"],
+        "outbound": "direct"
+      }
+    ]
+  }
+}
