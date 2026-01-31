@@ -50,3 +50,12 @@ curl -X POST "$(curl -s http://localhost:8318)/v1/messages" \
 
 - `8317`: cli-proxy-api
 - `8318`: Tunnel URL endpoint
+
+## Documentation
+
+See [API_USAGE.md](./API_USAGE.md) for detailed API usage guide including:
+- Available models (Gemini, GPT-5, GLM)
+- Reasoning/thinking parameters
+- Python, JavaScript examples
+- Streaming support
+- Troubleshooting
